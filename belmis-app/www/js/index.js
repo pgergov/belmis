@@ -293,6 +293,7 @@ var app = {
 };
 var testAlarm = {
     setAlarm:function(caseNo){
+        console.log('asdasd')
         var d = new Date();
         if(caseNo == 1){
             d.setTime(d.getTime() - 2*60*1000); // set the alarm for two minutes prior to the current time on the next day
