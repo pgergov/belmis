@@ -602,6 +602,14 @@ module.exports = [
             "navigator.notification",
             "navigator"
         ]
+    },
+    {
+        "file": "plugins/org.nypr.cordova.wakeupplugin/www/wakeup.js",
+        "id": "org.nypr.cordova.wakeupplugin.Wakeup",
+        "pluginId": "org.nypr.cordova.wakeupplugin",
+        "clobbers": [
+            "wakeuptimer"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -627,7 +635,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.2",
-    "cordova-plugin-whitelist": "1.2.2"
+    "cordova-plugin-whitelist": "1.2.2",
+    "org.nypr.cordova.wakeupplugin": "0.1.0"
 }
 // BOTTOM OF METADATA
 });
