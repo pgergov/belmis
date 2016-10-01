@@ -117,4 +117,28 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+
+    <hook type="before_build" src="scripts/appBeforeBuild.bat" />
+    <hook type="before_build" src="scripts/appBeforeBuild.js" />
+    <hook type="before_plugin_install" src="scripts/appBeforePluginInstall.js" />
+
+    <platform name="wp8">
+        <hook type="before_build" src="scripts/wp8/appWP8BeforeBuild.bat" />
+        <hook type="before_build" src="scripts/wp8/appWP8BeforeBuild.js" />
+        <hook type="before_plugin_install" src="scripts/wp8/appWP8BeforePluginInstall.js" />
+        ...
+    </platform>
+
+    <platform name="windows8">
+        <hook type="before_build" src="scripts/windows8/appWin8BeforeBuild.bat" />
+        <hook type="before_build" src="scripts/windows8/appWin8BeforeBuild.js" />
+        <hook type="before_plugin_install" src="scripts/windows8/appWin8BeforePluginInstall.js" />
+        ...
+    </platform>
+
+    
+    <feature name="Media">
+        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+    </feature>
+
 </widget>

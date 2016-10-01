@@ -58,7 +58,7 @@ var app = {
         $('.set-alarm').on("click", function(){
             console.log($('.alarm-hour').val())
             $('.alarm-hour').append('<div>stana</div>')
-            navigator.notification.alert('stana')
+            // navigator.notification.alert('stana')
 
 
             var now = new Date();
@@ -74,7 +74,13 @@ var app = {
             if (millisTill10 < 0) {
                  millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
             }
-            setTimeout(function(){alert("It's 10am!")}, millisTill10);
+            setTimeout(function(){
+                // alert("It's 10am!")
+                // here's what happens at x o'clock
+                // ringing and making coffee....
+
+
+            }, millisTill10);
 
 
             // setTimeout(function(){ navigator.notification.alert('stana be'); }, 5000);
@@ -82,7 +88,8 @@ var app = {
                 url: 'http://192.168.1.100:8000/api/coffee/make/282c7275-d24a-4373-9ca0-29693b1bd1e3/',
                 method: "POST",
                 success: function(result){
-                    alert(result)
+                    // alert(result)
+                    console.log(result)
                 }
             })
             window.wakeuptimer.wakeup( function(){
@@ -118,7 +125,7 @@ var app = {
             var successCallback = function(result) {
                 navigator.notification.alert(result.time)
                 console.log(result)
-                alert(result.time)
+                // alert(result.time)
                 if (result.type==='wakeup') {
                     console.log('wakeup alarm detected--' + result.extra);
                 } else if(result.type==='set'){
