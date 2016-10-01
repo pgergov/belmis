@@ -59,6 +59,9 @@ var app = {
             console.log($('.alarm-hour').val())
             $('.alarm-hour').append('<div>stana</div>')
             navigator.notification.alert('stana')
+
+            setTimeout(function(){ navigator.notification.alert('stana be'); }, 5000);
+
             window.wakeuptimer.wakeup( function(){
                 navigator.notification.alert(result.time)
                 console.log('alalalall')
