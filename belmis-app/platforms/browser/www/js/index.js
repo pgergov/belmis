@@ -60,8 +60,31 @@ var app = {
             $('.alarm-hour').append('<div>stana</div>')
             navigator.notification.alert('stana')
 
-            setTimeout(function(){ navigator.notification.alert('stana be'); }, 5000);
 
+            var now = new Date();
+            var millisTill10 = new Date(
+                    now.getFullYear(),
+                    now.getMonth(),
+                    now.getDate(),
+                    parseInt($('.alarm-hour').val().split(':')[0]),
+                    parseInt($('.alarm-hour').val().split(':')[1]),
+                    0,
+                    0) - now;
+
+            if (millisTill10 < 0) {
+                 millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+            }
+            setTimeout(function(){alert("It's 10am!")}, millisTill10);
+
+
+            // setTimeout(function(){ navigator.notification.alert('stana be'); }, 5000);
+            $.ajax({
+                url: 'http://192.168.1.100:8000/api/coffee/make/282c7275-d24a-4373-9ca0-29693b1bd1e3/',
+                method: "POST",
+                success: function(result){
+                    alert(result)
+                }
+            })
             window.wakeuptimer.wakeup( function(){
                 navigator.notification.alert(result.time)
                 console.log('alalalall')
