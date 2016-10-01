@@ -45,7 +45,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     # custom users app
     'belmis.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
+    'belmis.devices.apps.DevicesConfig',
+    'belmis.api.apps.ApiConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
