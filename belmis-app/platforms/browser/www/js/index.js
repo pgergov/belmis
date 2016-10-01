@@ -36,9 +36,10 @@ var app = {
         app.receivedEvent('deviceready');
         console.log('device ready')
         $('.alarm-hour').timepicker({ 'timeFormat': 'H:i:s' });
-
-        $('.set-alarm').click(function(){
+        $('.touchend').on("click", function(){
             console.log($('.alarm-hour').val())
+            $('.alarm-hour').append('<div>stana</div>')
+            navigator.notification.alert('stana')
             window.wakeuptimer.wakeup( function(){
                 navigator.notification.alert(result.time)
                 console.log('alalalall')
@@ -49,11 +50,30 @@ var app = {
                     alarms : [{
                         type : 'onetime',
                         time : { hour : parseInt($('.alarm-hour').val().split(':')[0]), minute : parseInt($('.alarm-hour').val().split(':')[1]) },
-                        extra : { message : 'json containing app-specific information to be posted when alarm triggers' }, 
                         message : 'Alarm has expired!'
                    }] 
                }
             );
+        });
+        $('.set-alarm').on("click", function(){
+            console.log($('.alarm-hour').val())
+            $('.alarm-hour').append('<div>stana</div>')
+            navigator.notification.alert('stana')
+            window.wakeuptimer.wakeup( function(){
+                navigator.notification.alert(result.time)
+                console.log('alalalall')
+            },  
+               errorCallback, 
+               // a list of alarms to set
+               {
+                    alarms : [{
+                        type : 'onetime',
+                        time : { hour : parseInt($('.alarm-hour').val().split(':')[0]), minute : parseInt($('.alarm-hour').val().split(':')[1]) },
+                        message : 'Alarm has expired!'
+                   }] 
+               }
+            );
+
 
             // // snooze...
             // window.wakeuptimer.snooze( successCallback,
