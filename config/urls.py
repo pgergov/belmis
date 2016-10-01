@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^api/', include('belmis.api.urls', namespace='api')),
+    url(r'^docs/', include('rest_framework_docs.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,5 +13,5 @@ class TestCoffeeApisTestCase(TestCase):
         self.raspberry = Raspberry.objects.create(device=self.device, name='pi')
 
     def test_we_can_hit_make_coffee_api(self):
-        url = self.reverse('api:coffee:make-coffee', token=self.device.uuid)
+        url = self.reverse('api:coffee:make-coffee', device_token=self.device.uuid)
         response = self.post(url)
