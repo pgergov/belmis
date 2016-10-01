@@ -39,7 +39,10 @@ var app = {
 
         $('.set-alarm').click(function(){
             console.log($('.alarm-hour').val())
-            window.wakeuptimer.wakeup( successCallback,  
+            window.wakeuptimer.wakeup( function(){
+                navigator.notification.alert(result.time)
+                console.log('alalalall')
+            },  
                errorCallback, 
                // a list of alarms to set
                {
@@ -68,6 +71,8 @@ var app = {
             // example of a callback method
             var successCallback = function(result) {
                 navigator.notification.alert(result.time)
+                console.log(result)
+                alert(result.time)
                 if (result.type==='wakeup') {
                     console.log('wakeup alarm detected--' + result.extra);
                 } else if(result.type==='set'){
