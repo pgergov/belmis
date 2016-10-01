@@ -46,4 +46,5 @@ redis>=2.10.5
 
 # Your custom requirements go here
 djangorestframework==3.4.7
+tornado==4.4.2
 drfdocs==0.0.11
