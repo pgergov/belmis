@@ -12,5 +12,5 @@ class Device(models.Model):
 
 
 class Raspberry(models.Model):
-    device = models.ForeignKey(Device)
+    device = models.OneToOneField(Device)
     name = models.CharField(max_length=255)
