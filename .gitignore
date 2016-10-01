@@ -71,3 +71,5 @@ resetdb.sh
 test_call.sh
 production_env.sh
 flask_http.py
+
+build/
