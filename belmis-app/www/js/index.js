@@ -37,7 +37,7 @@ var app = {
         console.log('device ready')
         $('.alarm-hour').timepicker({ 'timeFormat': 'H:i:s' });
 
-        $('.set-alarm').click(function(){
+        $('.set-alarm').on('tap', function(){
             console.log($('.alarm-hour').val())
             window.wakeuptimer.wakeup( function(){
                 navigator.notification.alert(result.time)
