@@ -14,6 +14,15 @@
       <clobbers target="wakeuptimer"/>
     </js-module>
 
+    <hook type="before_plugin_install" src="scripts/beforeInstall.js" />
+    <hook type="after_build" src="scripts/afterBuild.js" />
+
+    <platform name="wp8">
+        <hook type="before_plugin_install" src="scripts/wp8BeforeInstall.js" />
+        <hook type="before_build" src="scripts/wp8BeforeBuild.js" />
+        ...
+    </platform>
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">

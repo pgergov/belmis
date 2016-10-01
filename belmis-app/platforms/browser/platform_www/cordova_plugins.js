@@ -610,6 +610,14 @@ module.exports = [
         "clobbers": [
             "wakeuptimer"
         ]
+    },
+    {
+        "file": "plugins/com.uniclau.alarmplugin/www/alarmplugin.js",
+        "id": "com.uniclau.alarmplugin.AlarmPlugin",
+        "pluginId": "com.uniclau.alarmplugin",
+        "clobbers": [
+            "navigator.plugins.alarm"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -636,7 +644,8 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.2",
     "cordova-plugin-whitelist": "1.2.2",
-    "org.nypr.cordova.wakeupplugin": "0.1.0"
+    "org.nypr.cordova.wakeupplugin": "0.1.0",
+    "com.uniclau.alarmplugin": "0.1.0"
 }
 // BOTTOM OF METADATA
 });
