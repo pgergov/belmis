@@ -34,6 +34,22 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         console.log('device ready')
         $('.alarm-hour').timepicker({ 'timeFormat': 'H:i:s' });
         $('.touchend').on("click", function(){
@@ -43,7 +59,7 @@ var app = {
             window.wakeuptimer.wakeup( function(){
                 navigator.notification.alert(result.time)
                 console.log('alalalall')
-            },  
+            },
                errorCallback, 
                // a list of alarms to set
                {
@@ -55,10 +71,41 @@ var app = {
                }
             );
         });
+        function addMinutes(date, minutes) {
+            return new Date(date.getTime() + minutes*60000);
+        }
         $('.set-alarm').on("click", function(){
             console.log($('.alarm-hour').val())
             $('.alarm-hour').append('<div>stana</div>')
             // navigator.notification.alert('stana')
+            
+
+            var t = new Date();
+            alert(t)
+            t = addMinutes(t, 1)
+            alert(t)
+
+            navigator.plugins.alarm.set(t,
+            function(){
+                alert('trqq da zvynne')
+              // SUCCESS
+            }, 
+            function(data){
+              // ERROR
+              alert(data)
+              alert('ne trqq da zvynne')
+            })
+            navigator.plugins.alarm.set(addMinutes(t, 2),
+            function(){
+                alert('trqq da zvynne')
+              // SUCCESS
+            }, 
+            function(data){
+              // ERROR
+              alert(data)
+              alert('ne trqq da zvynne')
+            })
+
 
 
             var now = new Date();

@@ -71,25 +71,40 @@ var app = {
                }
             );
         });
+        function addMinutes(date, minutes) {
+            return new Date(date.getTime() + minutes*60000);
+        }
         $('.set-alarm').on("click", function(){
             console.log($('.alarm-hour').val())
             $('.alarm-hour').append('<div>stana</div>')
             // navigator.notification.alert('stana')
             
 
-
             var t = new Date();
-            t.setSeconds(t.getSeconds() + 20);
+            alert(t)
+            t = addMinutes(t, 1)
+            alert(t)
 
-            navigator.plugins.alarm.set(t, 
+            navigator.plugins.alarm.set(t,
             function(){
                 alert('trqq da zvynne')
               // SUCCESS
             }, 
-            function(){
+            function(data){
               // ERROR
+              alert(data)
+              alert('ne trqq da zvynne')
             })
-
+            navigator.plugins.alarm.set(addMinutes(t, 2),
+            function(){
+                alert('trqq da zvynne')
+              // SUCCESS
+            }, 
+            function(data){
+              // ERROR
+              alert(data)
+              alert('ne trqq da zvynne')
+            })
 
 
 
