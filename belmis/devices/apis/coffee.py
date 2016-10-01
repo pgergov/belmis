@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+
 from rest_framework.views import APIView
 
 from belmis.devices.models import Device
@@ -8,4 +10,4 @@ class MakeCoffeeAPI(APIView):
 
     def post(self, request, *args, **kwargs):
         # TODO: Return proper response
-        return
+        return HttpResponse("Here's some text.")
