@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
 
     'rest_framework',
+    'rest_framework_docs'
 )
 
 # Apps specific for this project go here.

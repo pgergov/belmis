@@ -46,3 +46,4 @@ redis>=2.10.5
 
 # Your custom requirements go here
 djangorestframework==3.4.7
+drfdocs==0.0.11
