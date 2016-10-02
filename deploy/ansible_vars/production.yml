@@ -1,0 +1,5 @@
+server_domain: '77.104.155.11'
+
+gunicorn_workers: 3
+application_vars_file: application_vars/production_env.j2
+letsencrypt_domain: '{{ server_domain }}'
