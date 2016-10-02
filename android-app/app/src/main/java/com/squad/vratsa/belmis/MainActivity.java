@@ -136,11 +136,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // alarm management
                 minutes_input = (EditText) findViewById(R.id.minutes);
-                alarm_timepicker.setMinute(alarm_timepicker.getMinute() + Integer.parseInt(minutes_input.getText().toString()));
-                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getHour());
-                calendar.set(Calendar.MINUTE, alarm_timepicker.getMinute());
-                int hour = alarm_timepicker.getHour();
-                int minute = alarm_timepicker.getMinute();
+                alarm_timepicker.setCurrentMinute(alarm_timepicker.getCurrentMinute() + Integer.parseInt(minutes_input.getText().toString()));
+                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getCurrentHour());
+                calendar.set(Calendar.MINUTE, alarm_timepicker.getCurrentMinute());
+                int hour = alarm_timepicker.getCurrentHour();
+                int minute = alarm_timepicker.getCurrentMinute();
 
 
                 String hour_string = String.valueOf(hour);
@@ -171,10 +171,10 @@ public class MainActivity extends AppCompatActivity {
         alarm_on.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getHour());
-                calendar.set(Calendar.MINUTE, alarm_timepicker.getMinute());
-                int hour = alarm_timepicker.getHour();
-                int minute = alarm_timepicker.getMinute();
+                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getCurrentHour());
+                calendar.set(Calendar.MINUTE, alarm_timepicker.getCurrentMinute());
+                int hour = alarm_timepicker.getCurrentHour();
+                int minute = alarm_timepicker.getCurrentMinute();
 
 
                 String hour_string = String.valueOf(hour);
