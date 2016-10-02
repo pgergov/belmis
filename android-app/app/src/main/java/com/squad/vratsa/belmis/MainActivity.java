@@ -1,5 +1,7 @@
 package com.squad.vratsa.belmis;
 
+import java.io.*;
+import java.net.*;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -23,6 +25,19 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +51,47 @@ public class MainActivity extends AppCompatActivity {
     private void set_alarm_text(String s){
         update_text.setText(s);
     }
+    // HTTP POST request
+    private void sendPost() throws Exception {
 
+        //Your server URL
+        String url = "http://192.168.1.100:8000/";
+        URL obj = new URL(url);
+        //HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        //Request Parameters you want to send
+        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+
+        // Send post request
+        con.setDoOutput(true);// Should be part of code only for .Net web-services else no need for PHP
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print result
+        System.out.println(response.toString());
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +116,23 @@ public class MainActivity extends AppCompatActivity {
         final Intent my_intent = new Intent(this.context, Alarm_Receiver.class);
 
 
+        Button make_me_coffee = (Button) findViewById(R.id.make_me_coffee);
+
+        make_me_coffee.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+//                try{
+//                    sendPost();
+//                }catch (Exception e){
+//                    System.out.println(e);
+//                }
+                new SendRequest().execute("http://localhost:8000/");
+
+
+
+            }
+        });
+
         alarm_on.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -80,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     minute_string = String.valueOf("0"  + String.valueOf(minute));
                 }
 
+                my_intent.putExtra("extra", "yes");
+
 
                 set_alarm_text("Alarm set to: " + hour_string + " - " + minute_string);
 
@@ -96,6 +170,11 @@ public class MainActivity extends AppCompatActivity {
                 set_alarm_text("Alarm Off!");
 
                 alarm_manager.cancel(pending_intent);
+
+                my_intent.putExtra("extra", "alarm off");
+
+
+                sendBroadcast(my_intent);
             }
         });
 

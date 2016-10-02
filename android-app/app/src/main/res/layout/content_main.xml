@@ -61,4 +61,12 @@
         android:layout_below="@+id/alarm_on"
         android:layout_centerHorizontal="true"
         android:id="@+id/update_text" />
+
+    <Button
+        android:text="Make me coffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/make_me_coffee" />
 </RelativeLayout>

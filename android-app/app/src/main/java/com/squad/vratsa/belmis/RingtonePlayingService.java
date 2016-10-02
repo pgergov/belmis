@@ -24,6 +24,19 @@ public class RingtonePlayingService extends Service{
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
 
+
+
+        String state = intent.getExtras().getString("extra");
+        if(state.equals("alarm on")){
+            startId = 1;
+        }
+        else {
+            startId = 0;
+        }
+
+
+
+
         media_song = MediaPlayer.create(this, R.raw.super_rington);
         media_song.start();
 
