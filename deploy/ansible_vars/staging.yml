@@ -1,0 +1,5 @@
+server_domain: 'staging.example.com'
+
+gunicorn_workers: 3
+application_vars_file: application_vars/staging_env.j2
+letsencrypt_domain: '{{ server_domain }}'
