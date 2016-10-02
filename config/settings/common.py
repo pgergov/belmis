@@ -90,7 +90,7 @@ FIXTURE_DIRS = (
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "config.routing.channel_routing",
+        "ROUTING": "config.routing.routing",
     },
 }
 
