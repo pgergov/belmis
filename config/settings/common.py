@@ -41,7 +41,8 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
 
     'rest_framework',
-    'rest_framework_docs'
+    'rest_framework_docs',
+    'channels'
 )
 
 # Apps specific for this project go here.
@@ -84,6 +85,14 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 FIXTURE_DIRS = (
     str(APPS_DIR.path('fixtures')),
 )
+
+# Channels settings
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "config.routing.channel_routing",
+    },
+}
 
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
