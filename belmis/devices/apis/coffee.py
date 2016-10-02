@@ -1,13 +1,14 @@
 from django.http import HttpResponse
 
 from rest_framework.views import APIView
-
-from belmis.devices.models import Device
-from belmis.users.models import User
+from channels import Group
 
 
 class MakeCoffeeAPI(APIView):
 
     def post(self, request, *args, **kwargs):
-        # TODO: Return proper response
-        return HttpResponse("Here's some text.")
+        # TODO: Send token for verification
+        msg = "Make Coffee"
+        Group("raspberry").send({"text": msg})
+
+        return HttpResponse()
