@@ -1,0 +1,8 @@
+[all:vars]
+env=production
+
+[webservers]
+77.104.155.11
+
+[dbservers]
+77.104.155.11
