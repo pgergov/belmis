@@ -33,26 +33,22 @@ public class SendRequest extends AsyncTask<String, Void, String>{
             //Your server URL
             String url = urls[0];
             URL obj = new URL(url);
+
             //HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             //add reuqest header
-            con.setRequestMethod("GET");
+            con.setRequestMethod("POST");
             con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
             //Request Parameters you want to send
-            String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
 
             // Send post request
             con.setDoOutput(true);// Should be part of code only for .Net web-services else no need for PHP
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
             wr.flush();
             wr.close();
 
             int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Post parameters : " + urlParameters);
-            System.out.println("Response Code : " + responseCode);
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));

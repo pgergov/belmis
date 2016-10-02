@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class RingtonePlayingService extends Service{
     MediaPlayer media_song;
+    private int startId;
+    private boolean isRunning;
 
     @Nullable
     @Override
@@ -22,23 +24,42 @@ public class RingtonePlayingService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("LocalService", "Received start id " + startId + ": " + intent);
-
-
-
         String state = intent.getExtras().getString("extra");
-        if(state.equals("alarm on")){
-            startId = 1;
+        Log.i("LocalService", "Received start id " + startId + ": " + intent + ": " + state);
+        this.isRunning = true;
+
+
+        assert state != null;
+        switch (state) {
+            case "alarm off":
+                startId = 0;
+                this.startId = 0;
+                break;
+            case "alarm on":
+                startId = 1;
+                this.startId = 1;
+
+                break;
+            default:
+                startId = 0;
+                this.startId = 0;
+                break;
         }
-        else {
-            startId = 0;
+
+        if(startId==0 && this.isRunning){
+            media_song.stop();
+            media_song.reset();
+            this.isRunning = false;
+        }
+
+        if (startId == 1){
+            media_song = MediaPlayer.create(this, R.raw.super_rington);
+            media_song.start();
+            this.isRunning = true;
         }
 
 
 
-
-        media_song = MediaPlayer.create(this, R.raw.super_rington);
-        media_song.start();
 
 
         return START_NOT_STICKY;
@@ -49,6 +70,7 @@ public class RingtonePlayingService extends Service{
 
         // Tell the user we stopped.
         Toast.makeText(this, "on destroy called", Toast.LENGTH_SHORT).show();
+        this.isRunning = false;
     }
 
 

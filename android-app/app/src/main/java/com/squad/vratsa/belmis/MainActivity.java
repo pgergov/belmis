@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -47,52 +48,54 @@ public class MainActivity extends AppCompatActivity {
     TextView update_text;
     Context context;
     PendingIntent pending_intent;
+    EditText minutes_input;
 
     private void set_alarm_text(String s){
         update_text.setText(s);
     }
     // HTTP POST request
-    private void sendPost() throws Exception {
-
-        //Your server URL
-        String url = "http://192.168.1.100:8000/";
-        URL obj = new URL(url);
-        //HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        //Request Parameters you want to send
-        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-
-        // Send post request
-        con.setDoOutput(true);// Should be part of code only for .Net web-services else no need for PHP
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
-
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        //print result
-        System.out.println(response.toString());
-
-    }
-
+//    private void sendPost() throws Exception {
+//
+//        //Your server URL
+//        String url = "http://192.168.1.100:8000/";
+//        URL obj = new URL(url);
+//        //HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+//        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//        //add reuqest header
+//        con.setRequestMethod("POST");
+//        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+//
+//        //Request Parameters you want to send
+////        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+//
+//        // Send post request
+//        con.setDoOutput(true);// Should be part of code only for .Net web-services else no need for PHP
+//        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+////        wr.writeBytes(urlParameters);
+//        wr.flush();
+//        wr.close();
+//
+//        int responseCode = con.getResponseCode();
+//        Log.e("Response Code", String.valueOf(responseCode));
+//        System.out.println("\nSending 'POST' request to URL : " + url);
+////        System.out.println("Post parameters : " + urlParameters);
+//        System.out.println("Response Code : " + responseCode);
+//
+//        BufferedReader in = new BufferedReader(
+//                new InputStreamReader(con.getInputStream()));
+//        String inputLine;
+//        StringBuffer response = new StringBuffer();
+//
+//        while ((inputLine = in.readLine()) != null) {
+//            response.append(inputLine);
+//        }
+//        in.close();
+//
+//        //print result
+//        System.out.println(response.toString());
+//
+//    }
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,12 +124,44 @@ public class MainActivity extends AppCompatActivity {
         make_me_coffee.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-//                try{
-//                    sendPost();
-//                }catch (Exception e){
-//                    System.out.println(e);
-//                }
-                new SendRequest().execute("http://localhost:8000/");
+                new SendRequest().execute("http://192.168.1.100:8000/api/coffee/make/282c7275-d24a-4373-9ca0-29693b1bd1e3/");
+                // stop current alarm
+                my_intent.putExtra("extra", "alalrm off");
+
+                sendBroadcast(my_intent);
+
+                alarm_manager.cancel(pending_intent);
+                set_alarm_text("Alarm canceled");
+
+
+                // alarm management
+                minutes_input = (EditText) findViewById(R.id.minutes);
+                alarm_timepicker.setMinute(alarm_timepicker.getMinute() + Integer.parseInt(minutes_input.getText().toString()));
+                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getHour());
+                calendar.set(Calendar.MINUTE, alarm_timepicker.getMinute());
+                int hour = alarm_timepicker.getHour();
+                int minute = alarm_timepicker.getMinute();
+
+
+                String hour_string = String.valueOf(hour);
+                String minute_string = String.valueOf(minute);
+
+                if(hour > 12){
+                    hour_string = String.valueOf(hour - 12);
+                }
+                if(minute < 10){
+                    minute_string = String.valueOf("0"  + String.valueOf(minute));
+                }
+
+                my_intent.putExtra("extra", "alarm on");
+
+
+                set_alarm_text("Alarm set to: " + hour_string + " - " + minute_string);
+
+                pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
 
 
 
@@ -152,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     minute_string = String.valueOf("0"  + String.valueOf(minute));
                 }
 
-                my_intent.putExtra("extra", "yes");
+                my_intent.putExtra("extra", "alarm on");
 
 
                 set_alarm_text("Alarm set to: " + hour_string + " - " + minute_string);
@@ -167,14 +202,25 @@ public class MainActivity extends AppCompatActivity {
         alarm_off.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                set_alarm_text("Alarm Off!");
 
-                alarm_manager.cancel(pending_intent);
 
-                my_intent.putExtra("extra", "alarm off");
-
+                my_intent.putExtra("extra", "alalrm off");
 
                 sendBroadcast(my_intent);
+
+                alarm_manager.cancel(pending_intent);
+                set_alarm_text("Alarm canceled");
+
+
+//                //////////
+//                set_alarm_text("Alarm Off!");
+//
+//                alarm_manager.cancel(pending_intent);
+//
+//                my_intent.putExtra("extra", "alarm off");
+//
+//
+//                sendBroadcast(my_intent);
             }
         });
 

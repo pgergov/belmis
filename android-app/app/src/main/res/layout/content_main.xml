@@ -50,9 +50,11 @@
         android:id="@+id/timePicker"
         android:layout_below="@+id/timePicker"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:headerBackground="@android:color/holo_orange_light"
+        android:numbersSelectorColor="@android:color/holo_orange_light" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -60,13 +62,27 @@
         android:ems="10"
         android:layout_below="@+id/alarm_on"
         android:layout_centerHorizontal="true"
-        android:id="@+id/update_text" />
+        android:id="@+id/update_text"
+        android:clickable="false" />
 
     <Button
         android:text="Make me coffee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/make_me_coffee"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/make_me_coffee" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/minutes"
+        android:inputType="number"
+        android:autoText="false"
+        android:layout_toEndOf="@+id/alarm_on"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
