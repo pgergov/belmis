@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         make_me_coffee.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                new SendRequest().execute("http://192.168.1.100:8000/api/coffee/make/282c7275-d24a-4373-9ca0-29693b1bd1e3/");
+                new SendRequest().execute("http://192.168.1.106:8000/api/coffee/make/282c7275-d24a-4373-9ca0-29693b1bd1e3/");
                 // stop current alarm
                 my_intent.putExtra("extra", "alalrm off");
 

@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
-    android:focusableInTouchMode="true"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -46,7 +45,7 @@
         android:layout_toEndOf="@+id/alarm_on" />
 
     <TimePicker
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/timePicker"
         android:layout_below="@+id/timePicker"
@@ -61,12 +60,21 @@
         android:inputType="textPersonName"
         android:text="Did you set your alarm?"
         android:ems="10"
+        android:layout_below="@+id/alarm_on"
+        android:layout_centerHorizontal="true"
         android:id="@+id/update_text"
-        android:clickable="false"
-        android:layout_marginBottom="106dp"
-        android:textSize="35sp"
-        android:layout_above="@+id/make_me_coffee"
-        android:layout_centerHorizontal="true" />
+        android:clickable="false" />
+
+    <Button
+        android:text="Make me coffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/make_me_coffee"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -75,21 +83,9 @@
         android:id="@+id/minutes"
         android:inputType="number"
         android:autoText="false"
-        android:background="@android:color/holo_orange_light"
-        android:layout_alignBottom="@+id/make_me_coffee"
-        android:layout_alignRight="@+id/update_text"
-        android:layout_alignEnd="@+id/update_text"
-        android:layout_below="@+id/update_text" />
-
-    <Button
-        android:text="Make me coffee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/make_me_coffee"
-        android:layout_marginBottom="73dp"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/minutes"
-        android:layout_toStartOf="@+id/minutes"
-        android:layout_marginRight="28dp"
-        android:layout_marginEnd="28dp" />
+        android:layout_toRightOf="@+id/alarm_on"
+        android:layout_toEndOf="@+id/alarm_on"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp" />
 </RelativeLayout>
