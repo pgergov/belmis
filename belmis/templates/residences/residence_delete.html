@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form action="{% url 'residences:create' %}" method="POST" class="residence-form">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+{% endblock %}
+

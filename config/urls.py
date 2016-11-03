@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^api/', include('belmis.api.urls', namespace='api')),
+    url(r'^residence/', include('belmis.residences.urls', namespace='residences')),
     url(r'^docs/', include('rest_framework_docs.urls')),
 
 
