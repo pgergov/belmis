@@ -51,6 +51,7 @@ LOCAL_APPS = (
     'belmis.users.apps.UsersConfig',
     'belmis.devices.apps.DevicesConfig',
     'belmis.api.apps.ApiConfig',
+    'belmis.residences.apps.ResidencesConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
